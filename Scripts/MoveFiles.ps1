@@ -1,0 +1,1 @@
+﻿move \\polarshark\root\uploads\*.* \\testfiler\apexdata\claimstaker\claims\auto\5010

@@ -1,0 +1,66 @@
+Cmdlet			Alias		Cmd Command			Description
+
+Get-Location	GL			pwd					Current Dir
+Set-Location	sl			cd, chdir			Change dir
+copy-item		cpi			copy				copy files
+remove-item		ri			del					
+move-item		mi			move
+rename-item		rni			rn, ren				
+new-item		ni			mkdir					create new empty file or directory
+Clear-item		cli			n/a					clears contents of a file
+Set-item		si			n/a					Set contents of a file
+
+get-content		gc			type				sends contents of a file to the output stream
+set-content		sc			n/a					set contents of a file
+get-help about_automatic_variables
+
+Copy-Item .\*.* C:\onetouch\ -confirm:$false	overrides confirm prompt
+ipconfig /all >tshoot.txt; route print >>tshoot.txt; hostname >>tshoot.txt; net statistics worksation >>tshoot.txt
+
+(get-location).Drive.Name
+
+get-childitem C:\windows -recurse -include *.txt -ea 0 | Format-table -property name, length, lastwritetime
+get-process | get-member | sort-object -property name
+
+* (get-childitem)[1] | get-member
+get-childitem F:\QAFiles\reports -recurse | select-object name, CreationTime, LastAccessTime, Length | sort-object -property length
+
+Get-Childitem -force | get-member -memberType property
+get-member -inputobject get-childitem
+
+$wshShell = New-Object -Comobject "wscript.shell"
+$wshShell.
+
+(get-verb | measure-object).count || (get-verb).count cause get-verb returns array
+(get-command -Commandtype cmdlet | measure).count
+$count = 0 ; get-command -commandType cmdlet | group verb | sort count 
+	-descending | select -First 10  | % { $count += $_.count ; $count }
+
+get-service | sort-object -property name | format-wide -column 40
+
+	
+get-childitem | where-object {$_.LastWriteTime -gt (get-date).AddDays(-30)} |
+	copy-item -destination F:\claimstaker\claims\auto\5010
+	
+gci . *.* -rec | where { ! $_.PSIsContainer } | format-table -property name > currentFilesNotDirectories.txt
+
+Invoke-SQLcm
+$currentLocation = ((get-location).Drive).Root
+
+get-childitem | set-itemproperty -name IsReadOnly -value $false
+
+
+
+
+
+
+
+
+ **********************************************************************************
+ & = closure
+ $n = "powershell" ; $closure = {"hello $n" } ; & $closure ; #output Hello powershell
+ 
+ $add5 = {param($num) $num + 5} #nameless function
+ & $add5 5 						#call operator works with parameters too
+ 
+ 
